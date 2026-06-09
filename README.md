@@ -73,6 +73,7 @@ Below is a consolidated, README‑ready table comparing notable open‑source OS
 | **[Tails](https://tails.boum.org/)** | x86_64 / C, Shell | Linux distro | Privacy; amnesic live system routed through Tor | **Hint:** Download live ISO; verify signature; boot from USB |
 | **[Whonix](https://www.whonix.org/)** | x86_64 / Shell, Python | Linux + VMs | Privacy; Gateway + Workstation split for Tor isolation | **Hint:** Install via VM images (VirtualBox/QEMU) following docs |
 | **[Subgraph OS](https://subgraph.com/)** | x86_64 / C, Python | Hardened Linux | Security‑focused distro with sandboxed apps | **Hint:** Use live image or VM image; follow hardening docs |
+| **[Ironclad](https://ironclad-os.org/)** | x86_64, RISC‑V / SPARK, Ada | Monolithic (formally verified) | Security; formally verified kernel in SPARK/Ada for high‑assurance systems | **Hint:** Clone repo; install GNAT/Alire toolchain; `alr build`; boot image in QEMU |
 | **[OpenBSD](https://www.openbsd.org/)** | x86, ARM, others / C | Monolithic | Security and correctness focus; proactive hardening | **Hint:** Build from source with `build.sh` or use install media |
 | **[Minix 3](https://www.minix3.org/)** | x86 / C | Microkernel | Reliability/education; self‑healing microkernel | **Hint:** Clone repo; `make` and run in QEMU or on x86 hardware |
 | **[GNU Hurd](https://www.gnu.org/software/hurd/)** | x86 / C | Multiserver (Mach) | Research Unix‑like on Mach microkernel | **Hint:** Use Debian Hurd images or build Hurd from source; run in QEMU |
@@ -133,6 +134,7 @@ A modern experimental OS built using **SPEC‑kit**, designed for modularity, re
 ---
 
 ### 2. Security & Privacy OSes
+- **[Ironclad](https://ironclad-os.org/)** — formally verified kernel in SPARK/Ada; correctness proven at the language and proof level  
 - **[Qubes OS](https://www.qubes-os.org/)** — VM‑based isolation  
 - **[Tails](https://tails.boum.org/)** — amnesic, Tor‑routed  
 - **[Whonix](https://www.whonix.org/)** — gateway + workstation  
