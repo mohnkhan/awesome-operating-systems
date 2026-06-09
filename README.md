@@ -60,6 +60,7 @@ Below is a consolidated, README‑ready table comparing notable open‑source OS
 | **OS Name** | **Arch / Language** | **Kernel Type** | **Purpose & Uniqueness** | **Hint** |
 |-------------|---------------------|-----------------|--------------------------|----------|
 | **[MyOS2026](#myos2026)** | x86_64 / Rust, C | Modular Monolithic | Experimental OS‑dev; SPEC‑kit driven; RustyBox userland | **Hint:** Clone repo; `cargo build` + `make`; run in QEMU |
+| **[Asterinas](https://github.com/asterinas/asterinas)** | x86‑64, RISC‑V / Rust | Framekernel | Memory‑safe Linux‑compatible kernel; unsafe Rust confined to minimal OSTD TCB | **Hint:** Install OSDK (`cargo install cargo-osdk`); `make build`; boot in QEMU via `make run` |
 | **[Plan 9](https://9p.io/plan9/)** | x86, ARM / C | Microkernel‑like | Research; everything‑is‑a‑file, distributed primitives | **Hint:** Build with `mk` toolchain; run in emulator or on hardware |
 | **[Inferno](http://www.vitanuova.com/inferno/)** | x86, ARM, MIPS / Limbo, C | Dis VM | Distributed systems; Limbo + Styx protocol | **Hint:** Use Dis VM packages; build Limbo apps; run hosted Inferno |
 | **[Redox OS](https://www.redox-os.org/)** | x86_64, ARM / Rust | Microkernel | Secure modern OS; memory safety, RedoxFS | **Hint:** `cargo build` workspace; boot via QEMU or write image to USB |
@@ -123,6 +124,22 @@ A modern experimental OS built using **SPEC‑kit**, designed for modularity, re
 - SPEC‑driven OS evolution  
 - Rust‑based userland components  
 - Clean modular architecture for learning and experimentation
+
+#### Asterinas
+A clean‑slate, Linux‑compatible OS kernel written almost entirely in safe Rust, pioneering the **framekernel** architecture. Unsafe Rust is confined to a small, auditable framework called **OSTD**, keeping the memory‑safety trusted computing base minimal. Won the **SOSP 2025 Best Paper** award for its CortenMM memory‑management scheme.
+
+**Key Characteristics**
+- **Architecture:** x86‑64 (Tier 1), Intel TDX, RISC‑V 64 (Tier 2), LoongArch 64 (experimental)
+- **Kernel Type:** Framekernel — monolithic performance with microkernel‑inspired safe/unsafe separation
+- **Language:** Rust (~88%), C (~8%), Assembly
+- **Linux compatibility:** 230+ Linux syscalls; runs unmodified Linux binaries
+- **Tooling:** OSDK — purpose‑built toolkit making kernel dev feel like standard Rust app dev
+- **TEE support:** Intel TDX for confidential computing
+
+**Uniqueness**
+- Only the OSTD layer may use `unsafe`; rest of the kernel is provably memory‑safe  
+- Targets data centres, confidential VMs, autonomous vehicles, and embodied AI  
+- AsterNixOS: experimental Linux distribution built on top of Asterinas
 
 #### Other research/experimental entries
 - **[Plan 9](https://9p.io/plan9/)** — distributed, everything‑is‑a‑file model  
@@ -219,6 +236,15 @@ cd MyOS2026
 cargo build --workspace --release
 make image
 qemu-system-x86_64 -m 1024 -drive file=out/myos2026.img,format=raw -serial mon:stdio
+```
+- **Asterinas**
+```bash
+# Requires Rust nightly + OSDK
+cargo install cargo-osdk
+git clone https://github.com/asterinas/asterinas.git
+cd asterinas
+make build
+make run  # boots in QEMU
 ```
 - **Redox**
 ```bash
